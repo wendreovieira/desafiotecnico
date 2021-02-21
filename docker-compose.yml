@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  desafiotecnico.apicalculajuros:
+    image: ${DOCKER_REGISTRY-}desafiotecnicoapicalculajuros      
+    build:
+      context: .
+      dockerfile: DesafioTecnico.ApiCalculaJuros/Dockerfile
+
+  desafiotecnico.apitaxajuros:
+    image: ${DOCKER_REGISTRY-}desafiotecnicoapitaxajuros
+    build:
+      context: .
+      dockerfile: DesafioTecnico.ApiTaxaJuros/Dockerfile
+

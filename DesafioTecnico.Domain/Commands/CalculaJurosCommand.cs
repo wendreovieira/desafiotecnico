@@ -7,9 +7,9 @@ namespace DesafioTecnico.Domain.Commands
     {
         public CalculaJurosCommand(decimal valor, double juros, int meses)
         {
-            if (valor <= 0) throw new ArgumentOutOfRangeException();
-            if (juros <= 0) throw new ArgumentOutOfRangeException();
-            if (meses <= 0) throw new ArgumentOutOfRangeException();
+            if (valor <= 0) throw new ArgumentException();
+            if (juros <= 0) throw new ArgumentException();
+            if (meses <= 0) throw new ArgumentException();
 
             Valor = valor;
             Juros = juros;

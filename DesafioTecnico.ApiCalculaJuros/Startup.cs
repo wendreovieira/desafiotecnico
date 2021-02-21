@@ -1,3 +1,4 @@
+using DesafioTecnico.ApiCalculaJuros.Configurations;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -22,6 +23,8 @@ namespace DesafioTecnico.ApiCalculaJuros
         {
             services.AddControllers();
 
+            services.AddSwaggerConfiguration();
+
             var assembly = AppDomain.CurrentDomain.Load("DesafioTecnico.Domain");
             services.AddMediatR(assembly);
         }
@@ -44,6 +47,8 @@ namespace DesafioTecnico.ApiCalculaJuros
             {
                 endpoints.MapControllers();
             });
+
+            app.UseSwaggerSetup();
         }
     }
 }

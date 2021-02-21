@@ -1,4 +1,5 @@
-﻿using DesafioTecnico.Domain.Commands;
+﻿using DesafioTecnico.ApiTaxaJuros.Helper;
+using DesafioTecnico.Domain.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,8 +12,7 @@ namespace DesafioTecnico.ApiCalculaJuros.Controllers
     [Route("calculajuros")]
     public class CalculaJurosController : ControllerBase
     {
-        private readonly IMediator _mediator;
-        private readonly Uri _apiUrl = new Uri("https://localhost:44339/");
+        private readonly IMediator _mediator;                
 
         public CalculaJurosController(IMediator mediator)
         {
@@ -25,12 +25,11 @@ namespace DesafioTecnico.ApiCalculaJuros.Controllers
             double taxa = 0;
 
             using (var client = new HttpClient())
-            {
-                client.BaseAddress = _apiUrl;
-                var response = await client.GetAsync("taxajuros");
-
+            {                                
+                var response = await client.GetAsync(ApiRoutes.TaxaJuros.GetDocker);
+                
                 if (response.IsSuccessStatusCode)                                    
-                    taxa = Double.Parse((await response.Content.ReadAsStringAsync()).Replace(".", ","));                
+                    taxa = Double.Parse(await response.Content.ReadAsStringAsync());                
             }
             
             var command = new CalculaJurosCommand(valor, taxa, meses);
